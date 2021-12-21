@@ -1,15 +1,16 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Input from '~/components/Input';
 
 import groceries from '~/assets/images/groceries.png';
-import { getCategorySubjectAction } from '~/store/ducks/categorySubject/actions';
+import { getCategorySubjectAction, getQuestionsAction } from '~/store/ducks/categorySubject/actions';
 
 import { validationSchema } from './validations';
 
 import * as S from './styles';
+import { AplicationState } from '~/@types/entities/AplicationState';
 
 interface DataProps {
   username: string;
@@ -20,9 +21,14 @@ export function Login() {
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
+  const {loadingCategorySubject} = useSelector((state: AplicationState) => state.categorySubject)
 
-  async function handleCategory() {
+   function handleCategory() {
     dispatch(getCategorySubjectAction());
+  }
+
+  function handleQuestions() {
+    dispatch(getQuestionsAction(9, 'easy'));
   }
 
   const { handleSubmit, dirty, handleChange, values, errors } = useFormik({
@@ -63,8 +69,10 @@ export function Login() {
         />
       </S.ContainerInputs>
       <S.ContainerButton>
-        <S.Button onPress={() => handleCategory()}>
-          <S.ButtonText>Entrar</S.ButtonText>
+        <S.Button onPress={() => handleQuestions()}>
+          {loadingCategorySubject ? <S.Indicator /> : <S.ButtonText>Entrar</S.ButtonText>}
+
+
         </S.Button>
       </S.ContainerButton>
     </S.Container>

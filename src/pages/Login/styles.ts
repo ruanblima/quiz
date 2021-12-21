@@ -6,6 +6,8 @@ export const StatusBar = styled.StatusBar.attrs(({ theme }) => ({
   backgroundColor: theme.Colors.BLUE,
 }))``;
 
+export const Indicator = styled.ActivityIndicator``;
+
 export const Container = styled.View`
   flex: 1;
   align-items: center;

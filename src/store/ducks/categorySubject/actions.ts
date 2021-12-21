@@ -4,6 +4,7 @@ import type {
   GetCategorySubjectActionProps,
   GetCategorySubjectSuccessActionProps,
   GetCategorySubjectErrorActionProps,
+  GetQuestionsActionProps
 } from './types';
 import { CategorySubjectTypes } from './types';
 
@@ -18,3 +19,8 @@ export const getCategorySubjectSuccessAction = (
 export const getCategorySubjectErrorAction =
   (): GetCategorySubjectErrorActionProps =>
     action(CategorySubjectTypes.GET_CATEGORY_ERROR);
+
+    export const getQuestionsAction = (
+      idCategory: number, difficulty: string,
+    ): GetQuestionsActionProps =>
+      action(CategorySubjectTypes.GET_QUESTION, { idCategory, difficulty });

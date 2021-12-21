@@ -33,6 +33,12 @@ const reducer: Reducer<CategorySubjectState> = (
         loadingCategorySubject: false,
         errorGetCategory: true,
       };
+
+      case CategorySubjectTypes.GET_QUESTION:
+      return {
+        ...state,
+        loadingCategorySubject: true,
+      };
     default:
       return state;
   }
